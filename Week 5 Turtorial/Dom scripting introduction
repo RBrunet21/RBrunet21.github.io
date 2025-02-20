@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simple DOM Example</title>
+    <style>
+      .highlight {
+        color: white;
+        background-color: black;
+        padding: 10px;
+        width: 250px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <img
+        src="dinosaur.png"
+        alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth." />
+      <p>
+        Here we will add a link to the
+        <a href="https://www.mozilla.org/">Mozilla homepage</a>
+      </p>
+    </section>
+    
+    <!-- DOM Manipulation Script -->
+    <script>
+      // 1. Select the link element and store a reference
+      const link = document.querySelector("a");
+      // 2. Change link text
+      link.textContent = "Mozilla Developer Network";
+      // 3. Change link URL
+      link.href = "https://developer.mozilla.org";
+
+      // 4. Select the section element
+      const sect = document.querySelector("section");
+      // 5. Create a new paragraph and add text
+      const para = document.createElement("p");
+      para.textContent = "We hope you enjoyed the ride.";
+      // 6. Append the new paragraph to the section
+      sect.appendChild(para);
+
+      // 7. Create and append a text node to the existing paragraph
+      const text = document.createTextNode(" — the premier source for web development knowledge.");
+      const linkPara = document.querySelector("p");
+      linkPara.appendChild(text);
+
+      // 8. Manipulating the paragraph style directly using JavaScript
+      para.style.color = "white";
+      para.style.backgroundColor = "black";
+      para.style.padding = "10px";
+      para.style.width = "250px";
+      para.style.textAlign = "center";
+
+      // 9. Add a class to the paragraph using setAttribute
+      para.setAttribute("class", "highlight");
+
+      // 10. Move and remove nodes
+      sect.appendChild(linkPara); // Move the paragraph to the bottom
+      sect.removeChild(linkPara); // Remove the paragraph
+
+      // 11. Create a shopping list dynamically
+      const input = document.querySelector("input");
+      const button = document.querySelector("button");
+      const ul = document.querySelector("ul");
+
+      button.addEventListener("click", function() {
+        // 12. Store the input value and empty the input
+        const item = input.value;
+        input.value = "";
+
+        // 13. Create a new list item, span, and delete button
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        const deleteButton = document.createElement("button");
+        
+        span.textContent = item; // Add item text
+        deleteButton.textContent = "Delete"; // Button text
+
+        // 14. Append elements to the list item
+        li.appendChild(span);
+        li.appendChild(deleteButton);
+
+        // 15. Append list item to the unordered list
+        ul.appendChild(li);
+
+        // 16. Delete item functionality
+        deleteButton.addEventListener("click", function() {
+          ul.removeChild(li); // Remove the entire list item
+        });
+
+        // 17. Focus input for the next item
+        input.focus();
+      });
+    </script>
+
+    <div>
+      <label for="new-item">Enter a new item:</label>
+      <input type="text" id="new-item">
+      <button>Add Item</button>
+    </div>
+
+    <ul>
+      <!-- List items will be added here -->
+    </ul>
+
+  </body>
+</html>
