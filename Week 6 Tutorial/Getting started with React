@@ -1,0 +1,110 @@
+// Starting fresh
+// Before we start building our app, we're going to delete some of the boilerplate code that Vite provided for us.
+
+// Experiment: Change <h1> element in App.jsx to say "Hello, World!"
+// Save the file and observe the immediate change in the browser at http://localhost:3000.
+
+// Replace the contents of App.jsx with the following:
+
+import "./App.css";
+
+// Function to render the basic "Hello, World!" message
+function App() {
+  return (
+    <>
+      <header>
+        <h1>Hello, World!</h1>
+      </header>
+    </>
+  );
+}
+
+export default App;
+
+// Practice with JSX
+// We'll now practice working with JSX and data in React.
+// We will discuss how to add attributes, write comments, render dynamic content, and use props.
+
+// Adding attributes to JSX elements
+// JSX elements can have attributes like HTML elements.
+// For example, add a button below <h1> element:
+
+<button type="button">Click me!</button>
+
+// The button does nothing yet, but we'll add interactivity later.
+
+// Some attributes in JSX are different than HTML due to JavaScript reserved words.
+// For example, use `className` instead of `class` in JSX:
+
+<button type="button" className="primary">Click me!</button>
+
+// JavaScript expressions as content in JSX
+// JSX allows JavaScript expressions inside curly braces `{}`.
+// For example, declare a variable and render it inside JSX:
+
+const subject = "React";
+
+// Replace "World" in <h1> with the variable `subject`
+<h1>Hello, {subject}!</h1>
+
+// Examples of other expressions in JSX:
+<h1>Hello, {subject + ' :)'}!</h1>  // String concatenation
+<h1>Hello, {subject.toUpperCase()}</h1>  // Method invocation
+<h1>Hello, {2 + 2}!</h1>  // Math operation
+
+// Comments in JSX are written inside curly braces too, but you need block comment syntax:
+{/* This is a comment in JSX */}
+
+<h1>Hello, {subject}!</h1>
+
+// Component props
+// Props are a way of passing data into a React component, written as prop="value".
+// Props are passed from parent components to child components, and React follows unidirectional data flow.
+
+import "./App.css";
+
+// Pass a prop to the App component from main.jsx
+<App subject="Clarice" />
+
+// In App.jsx, accept props as a parameter and log them to inspect:
+function App(props) {
+  console.log(props);
+  return (
+    <>
+      <header>
+        <h1>Hello, {props.subject}!</h1>
+        <button type="button" className="primary">Click me!</button>
+      </header>
+    </>
+  );
+}
+
+export default App;
+
+// After saving, you’ll see an object logged to the console like:
+// { subject: "Clarice" }
+
+// To fix the error, uncomment the <h1>Hello {subject}!</h1> line and change it to use `props.subject` instead:
+function App(props) {
+  return (
+    <>
+      <header>
+        <h1>Hello, {props.subject}!</h1>
+        <button type="button" className="primary">Click me!</button>
+      </header>
+    </>
+  );
+}
+
+// Save and you'll see "Hello, Clarice!" rendered on the page.
+
+// Try adding another prop called "greeting" and use it alongside "subject" in App.jsx.
+
+// Summary
+// Key takeaways about React:
+
+// 1. Components import modules and export themselves at the bottom of their files.
+// 2. Components are named in PascalCase.
+// 3. JavaScript expressions go inside curly braces `{}` in JSX.
+// 4. JSX attributes can differ from HTML attributes (e.g., `class` → `className`).
+// 5. Props are passed as attributes into components and used to pass data.
