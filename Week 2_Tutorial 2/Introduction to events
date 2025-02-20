@@ -1,0 +1,138 @@
+// ---------------------------
+// JavaScript Events Explained
+// ---------------------------
+
+/*
+ * Events are actions or occurrences that happen in the browser and can be 
+ * responded to using JavaScript. They can be triggered by user interactions 
+ * (clicks, keystrokes, mouse movements, form submissions) or browser activities 
+ * (page load, window resize, error handling).
+ */
+
+// ----------------------------------
+// Handling a Click Event on a Button
+// ----------------------------------
+
+const btn = document.querySelector("button"); // Select the button element
+
+// Function to generate a random number up to the given max value
+function random(number) {
+  return Math.floor(Math.random() * (number + 1));
+}
+
+// Event listener for the button's "click" event
+btn.addEventListener("click", () => {
+  const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`; // Generate random RGB color
+  document.body.style.backgroundColor = rndCol; // Apply random color to the background
+});
+
+// -------------------------
+// Using a Named Function
+// -------------------------
+
+function changeBackground() {
+  const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+  document.body.style.backgroundColor = rndCol;
+}
+
+btn.addEventListener("click", changeBackground); // Attach named function as event handler
+
+// ----------------------------------
+// Listening for Other Events on a Button
+// ----------------------------------
+
+btn.addEventListener("dblclick", changeBackground); // Double-click event
+btn.addEventListener("mouseover", changeBackground); // Mouse hover event
+btn.addEventListener("mouseout", changeBackground); // Mouse out event
+
+// ----------------------------------
+// Removing an Event Listener
+// ----------------------------------
+
+btn.removeEventListener("click", changeBackground); // Removes the click event listener
+
+// ------------------------------------
+// Using AbortSignal to Remove Listeners
+// ------------------------------------
+
+const controller = new AbortController(); // Create an AbortController instance
+
+btn.addEventListener(
+  "click",
+  () => {
+    const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+    document.body.style.backgroundColor = rndCol;
+  },
+  { signal: controller.signal } // Attach event listener with a signal
+);
+
+controller.abort(); // Removes event listeners tied to this controller
+
+// -------------------------------------
+// Adding Multiple Listeners for One Event
+// -------------------------------------
+
+btn.addEventListener("click", functionA);
+btn.addEventListener("click", functionB);
+
+// ----------------------------------
+// Alternative Event Listener Methods
+// ----------------------------------
+
+// Using event handler properties (only one handler allowed)
+btn.onclick = changeBackground;
+
+// Using inline event handlers (not recommended)
+// <button onclick="changeBackground()">Click me</button>
+
+// ----------------------------------
+// Using the Event Object
+// ----------------------------------
+
+function bgChange(e) {
+  const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+  e.target.style.backgroundColor = rndCol; // Change background of the element that triggered the event
+  console.log(e); // Log event details
+}
+
+btn.addEventListener("click", bgChange); // Attach the handler with event object
+
+// ----------------------------------
+// Example: Handling Keyboard Events
+// ----------------------------------
+
+const textBox = document.querySelector("#textBox");
+const output = document.querySelector("#output");
+
+textBox.addEventListener("keydown", (event) => {
+  output.textContent = `You pressed "${event.key}".`; // Display the pressed key
+});
+
+// ----------------------------------
+// Preventing Default Form Behavior
+// ----------------------------------
+
+const form = document.querySelector("form");
+const fname = document.getElementById("fname");
+const lname = document.getElementById("lname");
+const message = document.querySelector("p");
+
+form.addEventListener("submit", (e) => {
+  if (fname.value === "" || lname.value === "") {
+    e.preventDefault(); // Stop form submission
+    message.textContent = "You need to fill in both names!";
+  }
+});
+
+// ----------------------------------
+// Summary
+// ----------------------------------
+
+/*
+ * - Events allow interaction with the user.
+ * - Use `addEventListener()` to register event handlers.
+ * - Event handlers can be functions defined separately or inline.
+ * - The event object (`event`, `e`, or `evt`) provides details about the event.
+ * - `preventDefault()` stops default actions like form submission.
+ * - Use `removeEventListener()` or `AbortSignal` to remove event handlers.
+ */

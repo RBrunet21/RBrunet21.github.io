@@ -1,0 +1,155 @@
+// Changing Button Text
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Text Change</title>
+</head>
+<body>
+    <button id="myButton">Click me</button>
+    <script>
+        const button = document.getElementById("myButton");
+
+        button.addEventListener("click", function() {
+            button.textContent = "You clicked me!";
+        });
+    </script>
+</body>
+</html>
+
+
+//DOM manipulation:Adding elements dynamically 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+</head>
+<body>
+    <button id="addTextButton">Add Text</button>
+    <script>
+        function createParagraph() {
+            const para = document.createElement("p");
+            para.textContent = "You clicked the button!";
+            document.body.appendChild(para);
+        }
+
+        document.getElementById("addTextButton").addEventListener("click", createParagraph);
+    </script>
+</body>
+</html>
+
+//Using Prompt to Get User input
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Example</title>
+</head>
+<body>
+    <button id="nameButton">Player 1</button>
+    <script>
+        function updateName() {
+            const name = prompt("Enter a new name:");
+            if (name) {
+                document.getElementById("nameButton").textContent = `Player 1: ${name}`;
+            }
+        }
+
+        document.getElementById("nameButton").addEventListener("click", updateName);
+    </script>
+</body>
+</html>
+
+//Working with external Javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External JavaScript</title>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <button id="externalButton">Click me</button>
+</body>
+</html>
+
+//JS file
+document.getElementById("externalButton").addEventListener("click", function() {
+    alert("This message comes from an external JavaScript file!");
+});
+
+//Using Geolocation API
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation API</title>
+</head>
+<body>
+    <button id="getLocation">Get My Location</button>
+    <p id="location"></p>
+
+    <script>
+        document.getElementById("getLocation").addEventListener("click", function() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    document.getElementById("location").textContent =
+                        `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+                });
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+//Canvas API:drawing a simple circle
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Example</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.arc(200, 100, 50, 0, Math.PI * 2);
+        ctx.fill();
+    </script>
+</body>
+</html>
+
+// Function: creates a new paragraph and appends it to the bottom of the HTML body.
+function createParagraph() {
+  const para = document.createElement("p"); // Create a new <p> element
+  para.textContent = "You clicked the button!"; // Set the text content of the paragraph
+  document.body.appendChild(para); // Append the paragraph to the body of the document
+}
+
+/*
+  1. Get references to all the buttons on the page using querySelectorAll.
+  2. Loop through all the buttons and add a click event listener to each one.
+  3. When any button is clicked, the createParagraph() function will run, creating and appending a paragraph.
+*/
+
+// Select all buttons on the page
+const buttons = document.querySelectorAll("button");
+
+// Loop through each button
+for (const button of buttons) {
+  // Attach an event listener to each button to call createParagraph when clicked
+  button.addEventListener("click", createParagraph);
+}

@@ -1,0 +1,120 @@
+// 1. Creating an Array
+// Arrays are created using square brackets [] and can store multiple items. 
+// They can contain various data types like strings, numbers, or even other arrays.
+const shopping = ["bread", "milk", "cheese", "hummus", "noodles"]; // An example shopping list.
+console.log(shopping); // Prints the shopping array.
+
+// Arrays can also store different data types in one array:
+const sequence = [1, 1, 2, 3, 5, 8, 13]; // Array of numbers (Fibonacci sequence).
+const random = ["tree", 795, [0, 1, 2]]; // Mixed array with string, number, and another array.
+
+// 2. Finding the Length of an Array
+// Use the .length property to get the number of items in an array.
+console.log(shopping.length); // 5, since there are 5 items in the shopping list.
+
+// 3. Accessing and Modifying Array Items
+// Array indices start at 0. To access an item, use its index inside square brackets [].
+console.log(shopping[0]); // "bread" (first item in the array).
+shopping[0] = "tahini"; // Modifies the first item in the array to "tahini".
+console.log(shopping); // [ "tahini", "milk", "cheese", "hummus", "noodles" ]
+
+// You can also access and modify nested arrays (arrays inside arrays):
+const random = ["tree", 795, [0, 1, 2]];
+console.log(random[2][2]); // Accesses 3rd item in the nested array: 2
+
+// 4. Finding the Index of Items in an Array
+// Use the indexOf() method to find the index of an item.
+const birds = ["Parrot", "Falcon", "Owl"];
+console.log(birds.indexOf("Owl")); // 2, because "Owl" is the 3rd item (index 2).
+console.log(birds.indexOf("Rabbit")); // -1, because "Rabbit" is not in the array.
+
+// 5. Adding Items to an Array
+// Use push() to add one or more items to the end of the array.
+const cities = ["Manchester", "Liverpool"];
+cities.push("Cardiff"); // Adds "Cardiff" to the end of the array.
+console.log(cities); // [ "Manchester", "Liverpool", "Cardiff" ]
+cities.push("Bradford", "Brighton"); // Adds multiple items.
+console.log(cities); // [ "Manchester", "Liverpool", "Cardiff", "Bradford", "Brighton" ]
+
+// You can also add an item to the start of the array using unshift().
+cities.unshift("Edinburgh"); // Adds "Edinburgh" to the beginning.
+console.log(cities); // [ "Edinburgh", "Manchester", "Liverpool", "Cardiff", "Bradford", "Brighton" ]
+
+// 6. Removing Items from an Array
+// Use pop() to remove the last item from an array.
+cities.pop(); // Removes the last item "Brighton".
+console.log(cities); // [ "Edinburgh", "Manchester", "Liverpool", "Cardiff", "Bradford" ]
+// pop() returns the removed item.
+const removedCity = cities.pop();
+console.log(removedCity); // "Brighton"
+
+// Use shift() to remove the first item.
+cities.shift(); // Removes "Edinburgh".
+console.log(cities); // [ "Manchester", "Liverpool", "Cardiff", "Bradford" ]
+
+// 7. Removing Items by Index
+// Use splice() to remove items at a specific index.
+const index = cities.indexOf("Liverpool");
+if (index !== -1) {
+  cities.splice(index, 1); // Removes 1 item at the "Liverpool" index.
+}
+console.log(cities); // [ "Manchester", "Cardiff", "Bradford" ]
+
+// 8. Accessing Every Item in an Array
+// Use a for...of loop to iterate through every item in the array.
+for (const bird of birds) {
+  console.log(bird); // Prints each bird in the birds array.
+}
+
+// 9. Modifying Every Item in an Array
+// Use map() to create a new array by modifying each item.
+const numbers = [5, 2, 7, 6];
+const doubled = numbers.map(number => number * 2); // Doubles each number.
+console.log(doubled); // [ 10, 4, 14, 12 ]
+
+// 10. Filtering Items in an Array
+// Use filter() to create a new array with items that pass a test.
+const cities = ["London", "Liverpool", "Totnes", "Edinburgh"];
+const longer = cities.filter(city => city.length > 8); // Filters cities with more than 8 letters.
+console.log(longer); // [ "Liverpool", "Edinburgh" ]
+
+// 11. Converting Between Strings and Arrays
+// Use split() to convert a string to an array, separating by a specific character.
+const data = "Manchester,London,Liverpool,Birmingham,Leeds,Carlisle";
+const citiesArray = data.split(","); // Splits the string by commas.
+console.log(citiesArray); // ["Manchester", "London", "Liverpool", "Birmingham", "Leeds", "Carlisle"]
+
+// Use join() to convert an array back to a string, separating by a specified character.
+const commaSeparated = citiesArray.join(","); // Joins the array with commas.
+console.log(commaSeparated); // "Manchester,London,Liverpool,Birmingham,Leeds,Carlisle"
+
+// 12. Active Learning: Printing Products (Invoice Example)
+// Assume you have an array of product names and prices, for example:
+const products = ["Shoes:23.99", "Shirt:15.99", "Hat:9.99"]; 
+let total = 0; // Variable to store the total price.
+
+// Loop through each product to print name and price, and calculate total.
+for (const product of products) {
+  const [name, price] = product.split(":"); // Splits the product string into name and price.
+  total += parseFloat(price); // Adds the price to the total, converting it to a number.
+  const itemText = `${name} — $${price}`; // Formats the string to display product name and price.
+  console.log(itemText); // Prints item details.
+}
+
+// After the loop ends, print the total.
+console.log("Total: $" + total.toFixed(2)); // Prints the total price.
+
+// 13. Active Learning: Top 5 Searches
+// Assuming there's an input field for search terms and an array to store them.
+let searchTerms = []; // Array to hold the previous search terms.
+
+// Add a new search term to the start of the array (assuming `searchInput.value` is the search input value).
+searchTerms.unshift(searchInput.value); // Adds the current search term at the start of the array.
+
+// Remove the last search term if there are more than 5 terms in the array.
+if (searchTerms.length > 5) {
+  searchTerms.pop(); // Removes the last item (oldest search term).
+}
+
+// Prints the top 5 search terms.
+console.log(searchTerms);

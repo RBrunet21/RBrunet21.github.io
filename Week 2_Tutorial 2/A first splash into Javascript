@@ -1,0 +1,114 @@
+// Random Number Generation
+// This line generates a random number between 1 and 100
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+// Declaring variables
+let guessCount = 1;
+const guessField = document.querySelector(".guessField"); // Reference to the input element
+const guessSubmit = document.querySelector(".guessSubmit"); // Reference to the submit button
+const lastResult = document.querySelector(".lastResult"); // Reference to the last result paragraph
+const lowOrHi = document.querySelector(".lowOrHi"); // Reference to the "Too high/low" message
+const guesses = document.querySelector(".guesses"); // Reference to the guesses paragraph
+
+// Check Guess Function
+// The checkGuess() function checks whether the player's guess is correct
+function checkGuess() {
+  const userGuess = Number(guessField.value); // Gets the user's guess and converts it to a number
+  if (guessCount === 1) {
+    guesses.textContent = "Previous guesses:"; // Displays 'Previous guesses' when it's the first guess
+  }
+  guesses.textContent = `${guesses.textContent} ${userGuess}`; // Appends the guess to the guesses paragraph
+
+  // If the user guesses correctly
+  if (userGuess === randomNumber) {
+    lastResult.textContent = "Congratulations! You got it right!";
+    lastResult.style.backgroundColor = "green"; // Sets a green background when the guess is correct
+    lowOrHi.textContent = ""; // Clears the "Too high/low" message
+    setGameOver(); // Ends the game
+  } else if (guessCount === 10) {
+    // If the user runs out of guesses
+    lastResult.textContent = "!!!GAME OVER!!!";
+    lowOrHi.textContent = ""; // Clears the "Too high/low" message
+    setGameOver(); // Ends the game
+  } else {
+    lastResult.textContent = "Wrong!"; // If the guess is wrong
+    lastResult.style.backgroundColor = "red"; // Sets a red background for wrong guesses
+    if (userGuess < randomNumber) {
+      lowOrHi.textContent = "Last guess was too low!"; // Tells the user their guess was too low
+    } else if (userGuess > randomNumber) {
+      lowOrHi.textContent = "Last guess was too high!"; // Tells the user their guess was too high
+    }
+  }
+
+  guessCount++; // Increments the guess count
+  guessField.value = ""; // Clears the input field
+  guessField.focus(); // Focuses the input field for the next guess
+}
+
+// Event Listener for Submit Button
+// This listens for the 'click' event on the submit button and runs the checkGuess function
+guessSubmit.addEventListener("click", checkGuess);
+
+// Set Game Over Function
+// This function is called when the game is over to disable the input and button, and add a reset button
+function setGameOver() {
+  guessField.disabled = true; // Disables the input field
+  guessSubmit.disabled = true; // Disables the submit button
+  resetButton = document.createElement("button"); // Creates a new reset button
+  resetButton.textContent = "Start new game"; // Sets the text of the reset button
+  document.body.append(resetButton); // Appends the reset button to the body
+  resetButton.addEventListener("click", resetGame); // Listens for a click on the reset button to run resetGame
+}
+
+// Reset Game Function
+// This function resets the game to its initial state
+function resetGame() {
+  guessCount = 1; // Resets the guess count to 1
+
+  // Resets the result paragraphs
+  const resetParas = document.querySelectorAll(".resultParas p");
+  for (const resetPara of resetParas) {
+    resetPara.textContent = ""; // Clears the text content of each result paragraph
+  }
+
+  resetButton.parentNode.removeChild(resetButton); // Removes the reset button
+
+  guessField.disabled = false; // Enables the input field
+  guessSubmit.disabled = false; // Enables the submit button
+  guessField.value = ""; // Clears the input field
+  guessField.focus(); // Focuses the input field for the next guess
+
+  lastResult.style.backgroundColor = "white"; // Resets the background color of the result
+
+  // Generates a new random number for the next game
+  randomNumber = Math.floor(Math.random() * 100) + 1;
+}
+
+// Loops - Using for...of to loop through the result paragraphs and reset them
+const resetParas = document.querySelectorAll(".resultParas p");
+for (const resetPara of resetParas) {
+  resetPara.textContent = ""; // Clears each paragraph inside the resultParas container
+}
+
+// Example of a for...of loop with an array (to understand loop concepts)
+const fruits = ["apples", "bananas", "cherries"];
+for (const fruit of fruits) {
+  console.log(fruit); // Logs each fruit in the array to the console
+}
+
+// Focus Method - Ensuring the input field is focused automatically when the page loads
+guessField.focus();
+
+// Working with Browser Objects
+// Setting focus on the input field when the page loads
+const guessField = document.querySelector(".guessField");
+guessField.focus();
+
+// Example of changing the value in the input field directly
+guessField.value = 2; // Changes the value of the input field to 2
+
+// Example of working with style properties
+guesses.style.backgroundColor = "yellow"; // Changes the background color of the guesses paragraph
+guesses.style.fontSize = "200%"; // Changes the font size of the guesses paragraph
+guesses.style.padding = "10px"; // Adds padding to the guesses paragraph
+guesses.style.boxShadow = "3px 3px 6px black"; // Adds a box shadow to the guesses paragraph

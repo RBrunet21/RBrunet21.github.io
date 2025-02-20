@@ -1,0 +1,144 @@
+// Everybody loves math!
+// Introduction to numbers in JavaScript
+
+// 1. Types of Numbers
+// We have different types of numbers in programming:
+// - Integers: Whole numbers, e.g., 10, 400, -5
+// - Floating point numbers (floats): Numbers with decimals, e.g., 12.5, 56.7786543
+// - JavaScript only has one data type for numbers: "Number". No distinction between integers and floats.
+
+const myInt = 5; // Integer
+const myFloat = 6.667; // Floating point number
+
+console.log(myInt); // Logs 5
+console.log(myFloat); // Logs 6.667
+
+// Checking data type of variables using `typeof`
+console.log(typeof myInt); // Logs "number"
+console.log(typeof myFloat); // Logs "number"
+
+// 2. Useful Number Methods
+// Number methods allow you to manipulate numbers in different ways.
+// Example: toFixed() rounds a number to a specific number of decimal places
+
+const lotsOfDecimal = 1.766584958675746364;
+const twoDecimalPlaces = lotsOfDecimal.toFixed(2); // Rounds to 2 decimal places
+console.log(twoDecimalPlaces); // Logs "1.77"
+
+// 3. Converting Strings to Numbers
+// Sometimes you get a number as a string and need to convert it into a number type to perform calculations.
+
+let myNumber = "74";
+myNumber += 3; // Concatenates "74" and 3, resulting in "743"
+console.log(myNumber); // Logs "743" (string)
+
+myNumber = Number(myNumber); // Convert to a number
+myNumber += 3; // Now the calculation works as expected
+console.log(myNumber); // Logs 77 (number)
+
+// 4. Arithmetic Operators in JavaScript
+// The basic arithmetic operators are used to perform calculations:
+
+// Addition (+)
+console.log(6 + 9); // Logs 15
+
+// Subtraction (-)
+console.log(20 - 15); // Logs 5
+
+// Multiplication (*)
+console.log(3 * 7); // Logs 21
+
+// Division (/)
+console.log(10 / 5); // Logs 2
+
+// Modulo (%), remainder of division
+console.log(8 % 3); // Logs 2 (8 divided by 3 gives remainder 2)
+
+const exponentResult = 5 ** 2; // Exponentiation, same as 5 * 5
+console.log(exponentResult); // Logs 25
+
+// 5. Operator Precedence
+// Operator precedence determines the order in which operations are performed.
+const result = 5 + 10 * 3; // 10 * 3 is calculated first, then 5 is added
+console.log(result); // Logs 35
+
+// Parentheses override operator precedence
+const correctResult = (5 + 10) * 3; // Parentheses first, so 15 * 3
+console.log(correctResult); // Logs 45
+
+// 6. Increment and Decrement Operators
+// The increment (++) and decrement (--) operators add or subtract 1 from a variable.
+
+let num1 = 4;
+num1++; // Increment num1 by 1
+console.log(num1); // Logs 5
+
+let num2 = 6;
+num2--; // Decrement num2 by 1
+console.log(num2); // Logs 5
+
+// 7. Assignment Operators
+// Assignment operators are used to assign values to variables.
+
+let x = 3;
+let y = 4;
+x = y; // x now holds the value of y (4)
+console.log(x); // Logs 4
+
+// Assignment operators can also combine math with assignment:
+
+x += 4; // Equivalent to x = x + 4
+console.log(x); // Logs 8
+
+x *= 3; // Equivalent to x = x * 3
+console.log(x); // Logs 24
+
+// 8. Comparison Operators
+// Comparison operators are used to compare two values.
+
+console.log(5 === 5); // Strict equality: true
+console.log(5 !== 3); // Strict non-equality: true
+console.log(10 < 6); // Less than: false
+console.log(10 > 20); // Greater than: false
+console.log(3 <= 2); // Less than or equal: false
+console.log(5 >= 4); // Greater than or equal: true
+
+// 9. Example of using comparison in decision making
+
+// Toggle button state using strict equality comparison
+const btn = document.querySelector("button");
+const txt = document.querySelector("p");
+
+btn.addEventListener("click", updateBtn);
+
+function updateBtn() {
+  if (btn.textContent === "Start machine") {
+    btn.textContent = "Stop machine";
+    txt.textContent = "The machine has started!";
+  } else {
+    btn.textContent = "Start machine";
+    txt.textContent = "The machine is stopped.";
+  }
+}
+
+// 10. Active Learning: Sizing a Canvas Box
+// Change box dimensions using arithmetic operators and assignment operators
+
+let x = 50; // Initial width
+let y = 50; // Initial height
+
+// Arithmetic Operations to change the box size
+x = 43 + 7; // Box width becomes 50px (calculated from 43 + 7)
+y = 25 * 3; // Box height becomes 75px (calculated from 25 * 3)
+console.log(`Box size: ${x}x${y}`); // Logs Box size: 50x75
+
+x = 250 % 50; // Box width becomes 250px using modulo (250 % 50 results in 0)
+y = (150 - 30) / 3; // Box height becomes 150px (calculated from (150 - 30) / 3)
+console.log(`Box size: ${x}x${y}`); // Logs Box size: 0x40
+
+x = 4; // Box width becomes 200px using assignment operator
+y = 50 * 3 + 2; // Box height becomes 200px using multiplication and addition assignment
+console.log(`Box size: ${x}x${y}`); // Logs Box size: 4x152
+
+// Summary
+// This code demonstrates basic number handling, mathematical operators, comparison operators, and how you can manipulate numbers in JavaScript.

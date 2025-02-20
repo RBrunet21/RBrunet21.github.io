@@ -1,0 +1,72 @@
+// Declaring strings
+const string = "The revolution will not be televised."; // String enclosed in double quotes
+console.log(string); // Output: The revolution will not be televised.
+
+// Correct ways to declare strings using different quote types
+const single = 'Single quotes'; // Using single quotes
+const double = "Double quotes"; // Using double quotes
+const backtick = `Backtick`; // Using backticks (template literals)
+
+console.log(single);  // Output: Single quotes
+console.log(double);  // Output: Double quotes
+console.log(backtick); // Output: Backtick
+
+// Incorrect ways to declare strings - Missing quotes
+// const badString1 = This is a test; // Error: Missing quotes
+// const badString2 = 'This is a test; // Error: Unterminated string literal
+// const badString3 = This is a test'; // Error: Missing closing quote
+
+// Using backticks (template literals) allows embedding JavaScript expressions:
+const name = "Chris";
+const greeting = `Hello, ${name}`; // Embedding variable inside template literal
+console.log(greeting); // Output: Hello, Chris
+
+// Concatenation using template literals:
+const one = "Hello, ";
+const two = "how are you?";
+const joined = `${one}${two}`; // Concatenation with template literals
+console.log(joined); // Output: Hello, how are you?
+
+// Concatenation using "+" operator:
+const greeting = "Hello";
+const name = "Chris";
+console.log(greeting + ", " + name); // Output: Hello, Chris
+
+// Embedding expressions inside template literals
+const song = "Fight the Youth";
+const score = 9;
+const highestScore = 10;
+const output = `I like the song ${song}. I gave it a score of ${(score / highestScore) * 100}%.`;
+console.log(output); // Output: I like the song Fight the Youth. I gave it a score of 90%.
+
+// Multiline strings with template literals:
+const newline = `One day you finally knew
+what you had to do, and began,`;
+console.log(newline); // Output: Multiline string content
+
+// Multiline string with normal string (using \n for line breaks):
+const newline = "One day you finally knew\nwhat you had to do, and began,";
+console.log(newline); // Output: Multiline string content with \n for line breaks
+
+// Including quotes inside strings using different quote types:
+const goodQuotes1 = 'She said "I think so!"'; // Using single quotes to enclose the string
+const goodQuotes2 = `She said "I'm not going in there!"`; // Using backticks for string with quotes inside
+
+// Escaping quotes inside strings with backslash:
+const bigmouth = 'I\'ve got no right to take my place…';
+console.log(bigmouth); // Output: I've got no right to take my place…
+
+// Numbers vs. strings: Concatenating strings with numbers
+const name = "Front ";
+const number = 242;
+console.log(name + number); // Output: Front 242 (number automatically converted to string)
+
+// Convert string to number
+const myString = "123";
+const myNum = Number(myString);
+console.log(typeof myNum); // Output: number
+
+// Convert number to string
+const myNum2 = 123;
+const myString2 = String(myNum2);
+console.log(typeof myString2); // Output: string

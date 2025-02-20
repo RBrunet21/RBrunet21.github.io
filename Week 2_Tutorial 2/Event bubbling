@@ -1,0 +1,225 @@
+// ------------------------------
+// Event Bubbling and Delegation
+// ------------------------------
+
+/*
+ * Event bubbling is when an event on a child element triggers event handlers on its parent elements,
+ * working its way up through the DOM hierarchy.
+ * This can sometimes lead to unexpected behaviors, but can be controlled using methods like stopPropagation().
+ */
+
+// -----------------------------------
+// Setting a Listener on a Parent Element
+// -----------------------------------
+
+/*
+ * Example: A button inside a parent <div> element. 
+ * When we add an event listener to the parent and click the button,
+ * the event bubbles up and triggers the listener on the parent.
+ */
+
+// HTML structure
+/*
+<div id="container">
+  <button>Click me!</button>
+</div>
+<pre id="output"></pre>
+*/
+
+const output = document.querySelector("#output");
+
+// Function to handle the event
+function handleClick(e) {
+  output.textContent += `You clicked on a ${e.currentTarget.tagName} element\n`;
+}
+
+const container = document.querySelector("#container");
+container.addEventListener("click", handleClick);
+
+// -------------------------------------
+// Bubbling Example: Multiple Listeners
+// -------------------------------------
+
+/*
+ * If we add event listeners to the button, the parent <div>, and the <body>,
+ * we will see all these listeners triggered as the event bubbles up.
+ */
+
+// HTML structure
+/*
+<body>
+  <div id="container">
+    <button>Click me!</button>
+  </div>
+  <pre id="output"></pre>
+</body>
+*/
+
+const button = document.querySelector("button");
+
+// Add event listeners to multiple elements
+document.body.addEventListener("click", handleClick);  // Fires when the <body> is clicked
+container.addEventListener("click", handleClick);     // Fires when the <div> is clicked
+button.addEventListener("click", handleClick);        // Fires when the <button> is clicked
+
+/*
+ * The event will bubble up, first triggering the button, then the <div> (parent), and finally the <body>.
+ * The order of events will be as follows:
+ * - You clicked on a BUTTON element
+ * - You clicked on a DIV element
+ * - You clicked on a BODY element
+ */
+
+// ------------------------
+// Video Player Example
+// ------------------------
+
+/*
+ * Example: When you click a "Display video" button, it shows the video box.
+ * When clicking the video, it starts playing. If you click anywhere else, the box hides.
+ */
+
+// HTML structure
+/*
+<button>Display video</button>
+
+<div class="hidden">
+  <video>
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+    <p>
+      Your browser doesn't support HTML video. Here is a
+      <a href="rabbit320.mp4">link to the video</a> instead.
+    </p>
+  </video>
+</div>
+*/
+
+const btn = document.querySelector("button");
+const box = document.querySelector("div");
+const video = document.querySelector("video");
+
+// Add event listeners to handle user interactions
+btn.addEventListener("click", () => box.classList.remove("hidden"));  // Show video box
+video.addEventListener("click", () => video.play());                  // Play video
+box.addEventListener("click", () => box.classList.add("hidden"));     // Hide video box when clicked anywhere else
+
+/*
+ * The issue arises because when you click the video, both the video play and box hide handlers are triggered.
+ */
+
+// Fixing with stopPropagation()
+/*
+ * We can prevent the box from hiding when clicking the video by using event.stopPropagation().
+ */
+
+video.addEventListener("click", (event) => {
+  event.stopPropagation(); // Prevent the event from bubbling up to the box
+  video.play();  // Play the video
+});
+
+// ------------------------
+// Event Capture Example
+// ------------------------
+
+/*
+ * Event capture is the opposite of event bubbling.
+ * The event will first fire on the outermost element and then propagate inward.
+ * You can enable it by passing the capture option to addEventListener().
+ */
+
+// HTML structure (same as previous)
+const outputCapture = document.querySelector("#output");
+
+// Function to handle click events during capture phase
+function handleCapture(e) {
+  outputCapture.textContent += `You clicked on a ${e.currentTarget.tagName} element\n`;
+}
+
+document.body.addEventListener("click", handleCapture, { capture: true });
+container.addEventListener("click", handleCapture, { capture: true });
+button.addEventListener("click", handleCapture);
+
+/*
+ * In this case, the event will fire first on the <body>, then on the <div>, and finally on the <button>.
+ * The order will be:
+ * - You clicked on a BODY element
+ * - You clicked on a DIV element
+ * - You clicked on a BUTTON element
+ */
+
+// ------------------------------
+// Event Delegation Example
+// ------------------------------
+
+/*
+ * In event delegation, instead of adding event listeners to each individual child element,
+ * we add the event listener to the parent and handle the event when it bubbles up.
+ * This is particularly useful for dynamically created elements or large numbers of child elements.
+ */
+
+// HTML structure
+/*
+<div id="container">
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+</div>
+*/
+
+const containerTiles = document.querySelector("#container");
+
+// Function to generate a random color
+function random(number) {
+  return Math.floor(Math.random() * number);
+}
+
+// Function to generate a random background color
+function bgChange() {
+  const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+  return rndCol;
+}
+
+// Add a single event listener to the parent container
+containerTiles.addEventListener("click", (event) => {
+  event.target.style.backgroundColor = bgChange();  // Change the clicked tile's color
+});
+
+// --------------------------------
+// Using event.target and event.currentTarget
+// --------------------------------
+
+/*
+ * event.target refers to the element that triggered the event.
+ * event.currentTarget refers to the element to which the event handler is attached.
+ * We can use these properties to access different elements in the event flow.
+ */
+
+containerTiles.addEventListener("click", (e) => {
+  const logTarget = `Target: ${e.target.tagName}`;
+  const logCurrentTarget = `Current target: ${e.currentTarget.tagName}`;
+  outputCapture.textContent += `${logTarget}, ${logCurrentTarget}\n`;
+});
+
+// --------------------------------
+// Summary of Key Concepts
+// --------------------------------
+
+/*
+ * - Event bubbling occurs when an event on a child element triggers events on its parent elements.
+ * - Event capture is the reverse order of bubbling, where events trigger from the outermost to the innermost element.
+ * - stopPropagation() prevents event bubbling, which can be useful in certain cases.
+ * - Event delegation allows us to handle events for many child elements by adding a single listener to their parent.
+ */

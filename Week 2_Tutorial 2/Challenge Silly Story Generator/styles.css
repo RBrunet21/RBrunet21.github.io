@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.story-container {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+input[type="text"], button {
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#story {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #555;
+}

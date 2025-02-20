@@ -1,0 +1,251 @@
+// ============================
+// Loops in JavaScript
+// ============================
+
+// **Why Are Loops Useful?**
+// Loops allow us to repeat tasks efficiently without duplicating code. 
+// Useful for handling collections (arrays, objects) or repeated actions (drawing, calculations).
+
+// ============================
+// Example 1: Drawing Random Circles on a Canvas
+// ============================
+
+// Selects the button and canvas elements
+const btn = document.querySelector("button");
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+
+// Sets canvas size to fit the browser window
+document.addEventListener("DOMContentLoaded", () => {
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
+});
+
+// Generates a random number between 0 and the given value
+function random(number) {
+  return Math.floor(Math.random() * number);
+}
+
+// Function to draw 100 random circles
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
+  for (let i = 0; i < 100; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(255 0 0 / 50%)"; // Red circles with transparency
+    ctx.arc(
+      random(canvas.width),  // Random x-coordinate
+      random(canvas.height), // Random y-coordinate
+      random(50),            // Random radius up to 50
+      0,
+      2 * Math.PI
+    );
+    ctx.fill();
+  }
+}
+
+// Adds an event listener to trigger the draw function when the button is clicked
+btn.addEventListener("click", draw);
+
+// ============================
+// Example 2: Looping Through a Collection
+// ============================
+
+// Using `for...of` loop to iterate through an array
+const cats = ["Leopard", "Serval", "Jaguar", "Tiger", "Caracal", "Lion"];
+
+for (const cat of cats) {
+  console.log(cat); // Prints each cat's name
+}
+
+// ============================
+// Example 3: Using `map()` and `filter()` for Loops in Collections
+// ============================
+
+// Using `map()` to transform each array item to uppercase
+function toUpper(string) {
+  return string.toUpperCase();
+}
+
+const upperCats = cats.map(toUpper);
+console.log(upperCats); 
+// Output: [ "LEOPARD", "SERVAL", "JAGUAR", "TIGER", "CARACAL", "LION" ]
+
+// Using `filter()` to find cats whose names start with "L"
+function lCat(cat) {
+  return cat.startsWith("L");
+}
+
+const filteredCats = cats.filter(lCat);
+console.log(filteredCats);
+// Output: [ "Leopard", "Lion" ]
+
+// ============================
+// Example 4: Standard `for` Loop
+// ============================
+
+// Calculate squares of numbers from 1 to 9
+const results = document.querySelector("#results");
+
+function calculate() {
+  for (let i = 1; i < 10; i++) {
+    const newResult = `${i} x ${i} = ${i * i}`;
+    results.textContent += `${newResult}\n`;
+  }
+  results.textContent += "\nFinished!\n\n";
+}
+
+// Selecting buttons
+const calculateBtn = document.querySelector("#calculate");
+const clearBtn = document.querySelector("#clear");
+
+// Adding event listeners for calculation and clearing results
+calculateBtn.addEventListener("click", calculate);
+clearBtn.addEventListener("click", () => (results.textContent = ""));
+
+// ============================
+// Example 5: Using a `for` Loop for Arrays
+// ============================
+
+// Formatting a sentence from an array of cat names
+const myCats = ["Pete", "Biggles", "Jasmine"];
+let myFavoriteCats = "My cats are called ";
+
+for (let i = 0; i < myCats.length; i++) {
+  if (i === myCats.length - 1) {
+    // Last item
+    myFavoriteCats += `and ${myCats[i]}.`;
+  } else {
+    myFavoriteCats += `${myCats[i]}, `;
+  }
+}
+
+console.log(myFavoriteCats);
+// Output: "My cats are called Pete, Biggles, and Jasmine."
+
+// ============================
+// Example 6: Exiting Loops with `break`
+// ============================
+
+// Contact list for searching
+const contacts = [
+  "Chris:2232322",
+  "Sarah:3453456",
+  "Bill:7654322",
+  "Mary:9998769",
+  "Dianne:9384975",
+];
+// Selecting elements from the DOM
+const para = document.querySelector("p");
+const input = document.querySelector("input");
+const btn = document.querySelector("button");
+
+// Event listener to generate integer squares
+btn.addEventListener("click", () => {
+  para.textContent = "Output: ";
+  const num = input.value;
+  input.value = "";
+  input.focus();
+  
+  for (let i = 1; i <= num; i++) {
+    let sqRoot = Math.sqrt(i);
+    if (Math.floor(sqRoot) !== sqRoot) {
+      continue; // Skip non-integer squares
+    }
+    para.textContent += `${i} `;
+  }
+});
+
+// Example using while loop
+const cats = ["Pete", "Biggles", "Jasmine"];
+let myFavoriteCats = "My cats are called ";
+let i = 0;
+
+while (i < cats.length) {
+  if (i === cats.length - 1) {
+    myFavoriteCats += `and ${cats[i]}.`;
+  } else {
+    myFavoriteCats += `${cats[i]}, `;
+  }
+  i++;
+}
+
+console.log(myFavoriteCats); // "My cats are called Pete, Biggles, and Jasmine."
+
+// Example using do...while loop
+let myFavoriteCatsDoWhile = "My cats are called ";
+let j = 0;
+
+do {
+  if (j === cats.length - 1) {
+    myFavoriteCatsDoWhile += `and ${cats[j]}.`;
+  } else {
+    myFavoriteCatsDoWhile += `${cats[j]}, `;
+  }
+  j++;
+} while (j < cats.length);
+
+console.log(myFavoriteCatsDoWhile); // "My cats are called Pete, Biggles, and Jasmine."
+
+// Launch countdown example
+const output = document.querySelector('.output');
+let count = 10;
+
+while (count >= 0) {
+  const para = document.createElement('p');
+  if (count === 10) {
+    para.textContent = "Countdown 10";
+  } else if (count === 0) {
+    para.textContent = "Blast off!";
+  } else {
+    para.textContent = count;
+  }
+  output.appendChild(para);
+  count--; // Decrement count to avoid infinite loop
+}
+
+// Guest list filtering example
+const people = ["Alice", "Bob", "Phil", "Charlie", "Lola", "Dave"];
+let admitted = "Admitted: ";
+let refused = "Refused: ";
+
+for (const person of people) {
+  if (person === "Phil" || person === "Lola") {
+    refused += `${person}, `;
+  } else {
+    admitted += `${person}, `;
+  }
+}
+
+// Removing trailing commas and adding a period
+admitted = admitted.slice(0, -2) + ".";
+refused = refused.slice(0, -2) + ".";
+
+console.log(admitted);
+console.log(refused);
+
+// Different loop types comparison
+const array = [1, 2, 3, 4, 5];
+
+// for...of loop
+for (const item of array) {
+  console.log(item);
+}
+
+// for loop
+for (let k = 0; k < array.length; k++) {
+  console.log(array[k]);
+}
+
+// while loop
+let l = 0;
+while (l < array.length) {
+  console.log(array[l]);
+  l++;
+}
+
+// do...while loop
+let m = 0;
+do {
+  console.log(array[m]);
+  m++;
+} while (m < array.length);

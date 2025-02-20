@@ -1,0 +1,99 @@
+// ===============================
+// Understanding Return Values in JavaScript
+// ===============================
+
+// Return values are the results a function gives back after execution.
+// Example: Using the `replace()` function to modify a string.
+const myText = "The weather is cold";
+const newString = myText.replace("cold", "warm"); // Replaces "cold" with "warm"
+console.log(newString); // Output: "The weather is warm"
+// Explanation: `replace()` finds a substring and replaces it, returning a new string.
+
+// ===============================
+// Writing Functions with Return Values
+// ===============================
+
+// Function to generate a random integer from 0 up to (but not including) a given number.
+function random(number) {
+  return Math.floor(Math.random() * number);
+}
+
+// Example usage in a canvas drawing function:
+function draw() {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT); // Clears the canvas before redrawing
+  for (let i = 0; i < 100; i++) { // Loops 100 times to create 100 random circles
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(255 0 0 / 50%)"; // Sets a semi-transparent red color
+    ctx.arc(random(WIDTH), random(HEIGHT), random(50), 0, 2 * Math.PI); // Draws circles with random positions and sizes
+    ctx.fill();
+  }
+}
+
+// ===============================
+// More Functions Using Return Values
+// ===============================
+
+// Function to return the square of a number
+function squared(num) {
+  return num * num;
+}
+
+// Function to return the cube of a number
+function cubed(num) {
+  return num * num * num;
+}
+
+// Function to calculate the factorial of a number
+function factorial(num) {
+  if (num < 0) return undefined; // Factorial is not defined for negative numbers
+  if (num === 0) return 1; // 0! is defined as 1
+  let x = num - 1;
+  while (x > 1) {
+    num *= x;
+    x--;
+  }
+  return num;
+}
+
+// ===============================
+// Handling User Input with Event Listeners
+// ===============================
+
+// Event listener for a text input field
+input.addEventListener("change", () => {
+  const num = parseFloat(input.value); // Converts input value to a number
+  if (isNaN(num)) {
+    para.textContent = "You need to enter a number!";
+  } else {
+    para.textContent = `${num} squared is ${squared(num)}. `;
+    para.textContent += `${num} cubed is ${cubed(num)}. `;
+    para.textContent += `${num} factorial is ${factorial(num)}. `;
+  }
+});
+
+// ===============================
+// Additional Challenge: More Functions
+// ===============================
+
+// Function to return the square root of a number
+function squareRoot(num) {
+  return Math.sqrt(num);
+}
+
+// Function to return the cube root of a number
+function cubeRoot(num) {
+  return Math.cbrt(num);
+}
+
+// Function to calculate the circumference of a circle given a radius
+function circumference(radius) {
+  return 2 * Math.PI * radius;
+}
+
+// ===============================
+// Conclusion
+// ===============================
+
+// - Functions with return values allow us to use the output elsewhere in the code.
+// - Always validate input data before performing operations.
+// - Creating a library of reusable functions can improve efficiency in programming.

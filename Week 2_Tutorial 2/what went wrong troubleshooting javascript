@@ -1,0 +1,64 @@
+<!-- Number Guessing Game with Deliberate Errors -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <p>Guess a number between 1 and 100.</p>
+
+    <label for="guessField">Enter a guess: </label>
+    <input type="number" id="guessField">
+    <button id="guessSubmit">Submit guess</button>
+    <p class="lowOrHi"></p>
+    <p>Guesses left: <span id="guessCount">10</span></p>
+
+    <script>
+        // Defining global variables
+        const guessSubmit = document.getElementById('guessSubmit');
+        const guessField = document.getElementById('guessField');
+        const lowOrHi = document.querySelector('.lowOrHi');
+        const guessCount = document.getElementById('guessCount');
+        
+        let randomNumber = Math.floor(Math.random() * 100) + 1;  // Random number between 1 and 100
+        let remainingGuesses = 10;
+
+        // Adding an event listener to the 'Submit guess' button
+        guessSubmit.addEventListener("click", checkGuess); // Fix typo: 'addeventListener' to 'addEventListener'
+
+        // Function to check the user's guess
+        function checkGuess() {
+            let userGuess = Number(guessField.value);
+            if (userGuess === randomNumber) {
+                lowOrHi.textContent = "Congratulations! You guessed correctly!";
+                // Reset the game after correct guess
+                resetGame();
+            } else if (userGuess < randomNumber) {
+                lowOrHi.textContent = "Last guess was too low!";
+            } else if (userGuess > randomNumber) {
+                lowOrHi.textContent = "Last guess was too high!";
+            }
+
+            remainingGuesses--;
+            guessCount.textContent = remainingGuesses;
+            
+            if (remainingGuesses === 0) {
+                lowOrHi.textContent = "Game over! You've run out of guesses.";
+                resetGame();
+            }
+        }
+
+        // Function to reset the game
+        function resetGame() {
+            remainingGuesses = 10;
+            guessCount.textContent = remainingGuesses;
+            randomNumber = Math.floor(Math.random() * 100) + 1;  // Fix random number generation: Multiply by 100
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Story Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    label {
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    input[type="text"] {
+      padding: 5px;
+      font-size: 16px;
+      margin-right: 20px;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Random Story Generator</h1>
+  
+  <!-- Input for the name -->
+  <label for="name">Enter your name:</label>
+  <input type="text" id="name" placeholder="Your name here">
+  
+  <!-- Radio buttons for selecting unit -->
+  <br>
+  <label for="uk">UK:</label>
+  <input type="radio" id="uk" name="unit" value="UK">
+  <label for="us">US:</label>
+  <input type="radio" id="us" name="unit" value="US">
+  
+  <!-- Button to generate the story -->
+  <button id="generate">Generate Story</button>
+
+  <!-- Paragraph to display the story -->
+  <p id="story"></p>
+
+  <script>
+    // Event listener for button click to generate story
+    document.getElementById('generate').addEventListener('click', generateStory);
+
+    function generateStory() {
+      // Get name input value
+      const name = document.getElementById('name').value;
+
+      // Get the selected unit value
+      const unit = document.querySelector('input[name="unit"]:checked');
+
+      // Check if unit is selected
+      if (!unit) {
+        alert('Please select a unit (UK or US).');
+        return;
+      }
+
+      // Generate random parts of the story
+      const place = ["a haunted house", "a secret island", "a magical forest", "a spooky castle"];
+      const action = ["found a treasure", "discovered a hidden door", "met a talking dragon", "encountered a mysterious stranger"];
+      const result = ["became the richest person in the world", "saved the day", "was cursed forever", "became famous across the lands"];
+
+      const randomPlace = place[Math.floor(Math.random() * place.length)];
+      const randomAction = action[Math.floor(Math.random() * action.length)];
+      const randomResult = result[Math.floor(Math.random() * result.length)];
+
+      // Choose the unit text based on the selected unit
+      const unitText = unit.value === "UK" ? "in London" : "in New York";
+
+      // Construct the story
+      const story = `${name} was walking ${unitText} when they stumbled upon ${randomPlace}. There, they ${randomAction} and ${randomResult}.`;
+
+      // Display the generated story
+      document.getElementById('story').textContent = story;
+    }
+  </script>
+
+</body>
+</html>

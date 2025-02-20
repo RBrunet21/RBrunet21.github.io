@@ -1,0 +1,44 @@
+// Select the button element from the DOM
+const btn = document.querySelector("button");
+
+// Function to display a custom message box
+function displayMessage(msgText, msgType) {
+    // Select the body element to append the message box
+    const body = document.body;
+
+    // Create a container div for the message box
+    const panel = document.createElement("div");
+    panel.setAttribute("class", "msgBox"); // Add a class for styling
+    body.appendChild(panel); // Add the message box to the page
+
+    // Create a paragraph element to hold the message text
+    const msg = document.createElement("p");
+    msg.textContent = msgText; // Set the text content to the provided message
+    panel.appendChild(msg); // Append the message to the panel
+
+    // Create a close button
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "x"; // Set button text
+    panel.appendChild(closeBtn); // Add the button to the panel
+
+    // Event listener to close the message box when the close button is clicked
+    closeBtn.addEventListener("click", () => {
+        panel.parentNode.removeChild(panel);
+    });
+
+    // Set icon and background color based on message type
+    if (msgType === "warning") {
+        msg.style.backgroundImage = "url(icons/warning.png)"; // Warning icon
+        panel.style.backgroundColor = "red"; // Warning background color
+    } else if (msgType === "chat") {
+        msg.style.backgroundImage = "url(icons/chat.png)"; // Chat icon
+        panel.style.backgroundColor = "aqua"; // Chat background color
+    } else {
+        msg.style.paddingLeft = "20px"; // Default padding if no type is specified
+    }
+}
+
+// Event listener to display the message when the button is clicked
+btn.addEventListener("click", () => {
+    displayMessage("Your inbox is almost full — delete some mails", "warning");
+});

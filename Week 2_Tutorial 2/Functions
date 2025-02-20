@@ -1,0 +1,124 @@
+// JavaScript Functions Overview
+
+// Built-in Browser Functions
+
+// 1. String manipulation using replace()
+const myText = "I am a string";
+const newString = myText.replace("string", "sausage");
+console.log(newString); // Output: "I am a sausage"
+
+// 2. Array manipulation using join()
+const myArray = ["I", "love", "chocolate", "frogs"];
+const madeAString = myArray.join(" ");
+console.log(madeAString); // Output: "I love chocolate frogs"
+
+// 3. Generating a random number using Math.random()
+const myNumber = Math.random();
+console.log(myNumber); // Output: A random number between 0 and 1
+
+// Custom Functions
+
+// Function to draw 100 random circles inside a <canvas> element
+function draw() {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  for (let i = 0; i < 100; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(255 0 0 / 50%)";
+    ctx.arc(random(WIDTH), random(HEIGHT), random(50), 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}
+
+// Function to generate a random whole number between 0 and a given number
+function random(number) {
+  return Math.floor(Math.random() * number);
+}
+
+// Invoking functions
+function myFunction() {
+  alert("hello");
+}
+
+myFunction(); // Calls the function and displays an alert
+
+// Function Parameters
+
+// Example of a function with parameters
+function greet(name) {
+  console.log(`Hello, ${name}!`);
+}
+
+greet("Ari"); // Output: Hello, Ari!
+
+// Function with a default parameter
+function hello(name = "Chris") {
+  console.log(`Hello ${name}!`);
+}
+
+hello("Ari"); // Output: Hello Ari!
+hello(); // Output: Hello Chris!
+
+// Anonymous Functions
+
+// Example of an anonymous function
+(function () {
+  alert("hello");
+})();
+
+// Using an anonymous function with addEventListener
+document.querySelector("#textBox").addEventListener("keydown", function (event) {
+  console.log(`You pressed "${event.key}".`);
+});
+
+// Arrow Functions
+
+// Example of an arrow function with addEventListener
+document.querySelector("#textBox").addEventListener("keydown", (event) => {
+  console.log(`You pressed "${event.key}".`);
+});
+
+// Arrow function with implicit return inside an array map()
+const originals = [1, 2, 3];
+const doubled = originals.map(item => item * 2);
+console.log(doubled); // Output: [2, 4, 6]
+
+// Function Scope and Conflicts
+
+// Global variable
+const x = 1;
+
+// Function with a local variable
+function a() {
+  const y = 2;
+  console.log(y); // Accessible within function a()
+}
+
+function b() {
+  const z = 3;
+  console.log(z); // Accessible within function b()
+}
+
+a(); // Output: 2
+b(); // Output: 3
+
+// Accessing global variable inside functions
+function c() {
+  console.log(x); // Works because x is global
+}
+
+c(); // Output: 1
+
+// Accessing local variable from another function (will cause an error)
+// console.log(y); // ReferenceError: y is not defined
+// console.log(z); // ReferenceError: z is not defined
+
+// Test case: calling a function with an undefined variable
+function testScope() {
+  console.log(y); // ReferenceError: y is not defined
+}
+
+// Uncommenting the following line will cause an error
+// testScope();
+
+// Conclusion
+// This file provides an overview of JavaScript functions, including built-in functions, custom functions, function parameters, anonymous functions, arrow functions, and function scope.

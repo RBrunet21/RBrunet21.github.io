@@ -1,0 +1,111 @@
+// Tools you need
+// Throughout this article, you'll be asked to type in lines of code to test your understanding of the content. 
+// If you are using a desktop browser, the best place to type your sample code is your browser's JavaScript console.
+
+// What is a variable?
+// A variable is a container for a value, like a number we might use in a sum, or a string that we might use as part of a sentence.
+
+// Variable example
+// Let's look at an example:
+const buttonA = document.querySelector("#button_A");
+const headingA = document.querySelector("#heading_A");
+
+let count = 1;
+
+buttonA.onclick = () => {
+  buttonA.textContent = "Try again!"; // Change button text
+  headingA.textContent = `${count} clicks so far`; // Display the count
+  count += 1; // Increment the count
+};
+
+// Without a variable
+// To understand why variables are useful, without one, we can't keep track of the count.
+const buttonB = document.querySelector("#button_B");
+const headingB = document.querySelector("#heading_B");
+
+buttonB.onclick = () => {
+  buttonB.textContent = "Try again!";
+  headingB.textContent = "1 click so far"; // Static message, no increment
+};
+
+// Declaring a variable
+// To use a variable, you must first declare it using `let`:
+let myName;
+let myAge;
+
+// Initializing a variable
+// Once declared, you can initialize it with a value:
+myName = "Chris";
+myAge = 37;
+
+// Declaring and initializing a variable at the same time:
+let myDog = "Rover";
+
+// A note about `var`
+// `var` was used before `let` but has confusing behaviors like hoisting and can be redeclared.
+
+var myName;
+var myAge;
+
+// Updating a variable
+// You can update a variable's value like this:
+myName = "Bob";
+myAge = 40;
+
+// An aside on variable naming rules
+// Variables should be named using Latin characters (a-z, A-Z), and underscores (_) but not at the start.
+// Don't use numbers at the start, and avoid JavaScript reserved keywords like `let`, `function`, `var`, and `for`.
+
+// Good name examples:
+let age;
+let myAge;
+let initialColor;
+let audio1;
+
+// Bad name examples:
+let 1; // Invalid (cannot start with a number)
+let a;
+let MYAGE; // Avoid uppercase names
+
+// Variable types
+// JavaScript supports several data types:
+let myAge = 17; // Number
+let dolphinGoodbye = "So long and thanks for all the fish"; // String
+let iAmAlive = true; // Boolean
+
+// Arrays (multiple values in one variable)
+let myNameArray = ["Chris", "Bob", "Jim"];
+let myNumberArray = [10, 15, 40];
+
+// Accessing array values:
+myNameArray[0]; // Returns 'Chris'
+myNumberArray[2]; // Returns 40
+
+// Objects (model real-life objects with key-value pairs):
+let dog = { name: "Spot", breed: "Dalmatian" };
+dog.name; // Returns "Spot"
+
+// Dynamic typing
+// JavaScript is dynamically typed, meaning the type of a variable is not fixed.
+let myString = "Hello"; // String
+let myNumber = "500"; // String (not a number, even though it looks like one)
+typeof myNumber; // Returns "string"
+
+myNumber = 500; // Now it's a number
+typeof myNumber; // Returns "number"
+
+// Constants in JavaScript
+// Constants are similar to variables but can't be reassigned after initialization:
+const count = 1;
+count = 2; // Error: Cannot reassign a constant
+
+// Updating content of an object declared with `const`
+const bird = { species: "Kestrel" };
+bird.species = "Striated Caracara"; // Works because we can modify the object, but not reassign the variable
+
+// When to use `const` vs `let`
+// Use `const` for values that will not be reassigned, and use `let` when the value will change.
+
+// Summary
+// You've learned about variables in JavaScript: how to declare, initialize, and update them. 
+// You also learned about variable types (numbers, strings, arrays, objects), dynamic typing, and when to use `let` and `const`.

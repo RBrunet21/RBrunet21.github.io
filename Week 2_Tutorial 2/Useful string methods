@@ -1,0 +1,97 @@
+// Strings as objects
+// Most values in JavaScript can be treated as objects, and strings are no exception.
+// Even though a string itself isn't technically an object, it behaves like one, providing access to various properties and methods.
+
+// Example string declaration
+const string = "This is my string"; // Declaring a string
+
+// Accessing the length of a string using the 'length' property
+const browserType = "mozilla";
+console.log(browserType.length); // Output: 7, because "mozilla" has 7 characters
+
+// Retrieving a specific character in a string using square bracket notation
+console.log(browserType[0]); // Output: 'm', since the first character is at index 0
+console.log(browserType[browserType.length - 1]); // Output: 'a', using the length-1 technique to get the last character
+
+// Testing if a string contains a substring using the 'includes()' method
+if (browserType.includes("zilla")) {
+  console.log("Found zilla!"); // Output: "Found zilla!" if "zilla" is in the string
+} else {
+  console.log("No zilla here!");
+}
+
+// Checking if a string starts or ends with a certain substring using 'startsWith()' and 'endsWith()'
+if (browserType.startsWith("zilla")) {
+  console.log("Found zilla!"); // Doesn't print because "mozilla" doesn't start with "zilla"
+} else {
+  console.log("No zilla here!");
+}
+
+if (browserType.endsWith("zilla")) {
+  console.log("Found zilla!"); // Output: "Found zilla!" because "mozilla" ends with "zilla"
+} else {
+  console.log("No zilla here!");
+}
+
+// Finding the position of a substring using the 'indexOf()' method
+const tagline = "MDN - Resources for developers, by developers";
+console.log(tagline.indexOf("developers")); // Output: 20, as "developers" first appears at index 20
+console.log(tagline.indexOf("x")); // Output: -1, as "x" is not found
+
+// Finding subsequent occurrences of a substring by passing in the starting index
+const firstOccurrence = tagline.indexOf("developers");
+const secondOccurrence = tagline.indexOf("developers", firstOccurrence + 1);
+console.log(firstOccurrence); // Output: 20
+console.log(secondOccurrence); // Output: 35
+
+// Extracting a substring from a string using the 'slice()' method
+console.log(browserType.slice(1, 4)); // Output: "ozi", extracts from index 1 to 3 (exclusive of 4)
+console.log(browserType.slice(2)); // Output: "zilla", extracts from index 2 to the end of the string
+
+// Converting a string to lowercase or uppercase using 'toLowerCase()' and 'toUpperCase()' methods
+const radData = "My NaMe Is MuD";
+console.log(radData.toLowerCase()); // Output: "my name is mud"
+console.log(radData.toUpperCase()); // Output: "MY NAME IS MUD"
+
+// Updating parts of a string using the 'replace()' method
+let updated = browserType.replace("moz", "van");
+console.log(updated); // Output: "vanilla" (first occurrence of "moz" replaced with "van")
+console.log(browserType); // Output: "mozilla", original string is unchanged
+
+// Reassigning the updated string to the original variable (using 'let' for reassignment)
+browserType = browserType.replace("moz", "van");
+console.log(browserType); // Output: "vanilla"
+
+// Replacing all occurrences using 'replaceAll()'
+let quote = "To be or not to be";
+quote = quote.replaceAll("be", "code");
+console.log(quote); // Output: "To code or not to code"
+
+// Active learning examples (practice exercises)
+// Exercise 1: Filtering greeting messages for Christmas messages
+// Example condition: if the string contains "Christmas", print the message
+const greetingMessages = ["Merry Christmas!", "Happy New Year!", "Season's Greetings!"];
+greetingMessages.forEach(message => {
+  if (message.includes("Christmas")) {
+    console.log(message); // Outputs Christmas messages
+  }
+});
+
+// Exercise 2: Fixing capitalization of city names (first letter uppercase, rest lowercase)
+const cities = ["london", "manchester", "birmingham"];
+const fixedCities = cities.map(city => {
+  const lower = city.toLowerCase();
+  return lower.charAt(0).toUpperCase() + lower.slice(1); // Capitalize the first letter and join with the rest
+});
+console.log(fixedCities); // Output: ["London", "Manchester", "Birmingham"]
+
+// Exercise 3: Making new strings from station data
+const stationData = ["MAN675847583748sjt567654;Manchester Piccadilly"];
+const formattedStations = stationData.map(data => {
+  const code = data.slice(0, 3); // Extract the station code
+  const name = data.slice(data.indexOf(";") + 1); // Extract the station name after the semicolon
+  return `${code}: ${name}`; // Concatenate station code and name
+});
+console.log(formattedStations); // Output: ["MAN: Manchester Piccadilly"]
+
+// End of exercises and learning
