@@ -1,0 +1,21 @@
+ 
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.section {
+    border: 1px solid #000;
+    padding: 10px;
+    width: 200px;
+    min-height: 150px;
+    background-color: #f9f9f9;
+}
+
+.course {
+    padding: 5px;
+    margin: 5px;
+    background: lightblue;
+    cursor: pointer;
+    border-radius: 5px;
+}

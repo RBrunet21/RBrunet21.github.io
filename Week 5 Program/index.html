@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Scheduler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Course Scheduler</h1>
+    <div class="container">
+        <div id="course-list" class="section" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Available Courses</h3>
+        </div>
+        <div id="Fall Semester" class="section" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Fall Semester</h3>
+        </div>
+        <div id="Spring Semester" class="section" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Spring Semester</h3>
+        </div>
+        <div id="Summer Semester" class="section" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Summer Semester</h3>
+        </div>
+    </div>
+    <p id="course-details"></p>
+    <script src="script.js"></script>
+</body>
+</html>
